@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Professional Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #0066cc;
+            --accent: #ff6b6b;
+            --light: #f8f9fa;
+            --text: #333333;
+            --text-light: #666666;
+            --border: #e0e0e0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: #ffffff;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            line-height: 1.1;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .hero .location {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .bio {
+            font-size: 1.1rem;
+            color: var(--text);
+            max-width: 700px;
+            margin: 2rem 0;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.85rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 102, 204, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--light);
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            padding: 2rem;
+            background: var(--light);
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .skill-card ul {
+            list-style: none;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .skill-card li:before {
+            content: "→ ";
+            color: var(--secondary);
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: var(--light);
+        }
+
+        .project-card:hover {
+            border-color: var(--secondary);
+            box-shadow: 0 12px 32px rgba(0, 102, 204, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .project-header {
+            padding: 2rem;
+            background: white;
+        }
+
+        .project-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .project-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            background: var(--light);
+            color: var(--secondary);
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            padding-left: 2rem;
+            margin-bottom: 3rem;
+            border-left: 3px solid var(--secondary);
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item:last-child {
+            border-left: 3px solid var(--border);
+        }
+
+        .timeline-item h3 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-item .company {
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .timeline-item .period {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        .timeline-item p {
+            color: var(--text-light);
+            margin-top: 0.8rem;
+            line-height: 1.6;
+        }
+
+        /* Certificates Section */
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .cert-card {
+            padding: 2rem;
+            background: white;
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .cert-card:hover {
+            background: var(--light);
+            transform: scale(1.05);
+        }
+
+        .cert-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-card .issuer {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-content p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            padding-bottom: 0.3rem;
+            border-bottom: 2px solid transparent;
+        }
+
+        .contact-link:hover {
+            border-bottom-color: var(--secondary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            margin-top: 4rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .hero {
+                margin-top: 150px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">YourName</div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certificates">Certificates</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+        <h1>Your Full Name</h1>
+        <p class="subtitle">Professional Title / Role</p>
+        <p class="location">📍 City, Country</p>
+        
+        <p class="bio">
+            Describe who you are in 2-3 sentences. Highlight your main skills, what you're passionate about, and what makes you unique. This should be compelling and personal.
+        </p>
+
+        <div class="cta-buttons">
+            <a href="#projects" class="btn btn-primary">View My Work</a>
+            <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Certificates</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2</div>
+                <div class="stat-label">Internships</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">BSc</div>
+                <div class="stat-label">Education</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about-detail">
+        <h2>About Me</h2>
+        <p class="bio" style="max-width: 100%;">
+            Write a detailed paragraph about your background, skills, and professional journey. Explain what drives you, what you've accomplished, and what you're looking to do next. Keep it authentic and engaging.
+        </p>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>Technical Skills</h3>
+                <ul>
+                    <li>Python</li>
+                    <li>SQL</li>
+                    <li>Data Analysis</li>
+                    <li>Excel</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>Tools & Platforms</h3>
+                <ul>
+                    <li>Power BI</li>
+                    <li>Tableau</li>
+                    <li>Google Analytics</li>
+                    <li>MySQL</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>Soft Skills</h3>
+                <ul>
+                    <li>Communication</li>
+                    <li>Problem Solving</li>
+                    <li>Project Management</li>
+                    <li>Teamwork</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>Project Name 1</h3>
+                    <p class="project-description">
+                        Brief description of what this project is about, the problem it solved, and the impact it had.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Data Analysis</span>
+                        <span class="tag">SQL</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>Project Name 2</h3>
+                    <p class="project-description">
+                        Brief description of what this project is about, the problem it solved, and the impact it had.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Power BI</span>
+                        <span class="tag">Dashboard</span>
+                        <span class="tag">Analytics</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>Project Name 3</h3>
+                    <p class="project-description">
+                        Brief description of what this project is about, the problem it solved, and the impact it had.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Excel</span>
+                        <span class="tag">Visualization</span>
+                        <span class="tag">Reporting</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2>Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>Job Title 1</h3>
+                <p class="company">Company Name</p>
+                <p class="period">Month Year – Present</p>
+                <p>Description of your role, responsibilities, and key achievements.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Job Title 2</h3>
+                <p class="company">Company Name</p>
+                <p class="period">Month Year – Month Year</p>
+                <p>Description of your role, responsibilities, and key achievements.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Internship</h3>
+                <p class="company">Company Name</p>
+                <p class="period">Month Year – Month Year</p>
+                <p>Description of your role, responsibilities, and key achievements.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates">
+        <h2>Certificates & Qualifications</h2>
+        <div class="certificates-grid">
+            <div class="cert-card">
+                <h3>Certificate Name 1</h3>
+                <p class="issuer">Issuing Organization</p>
+                <p style="font-size: 0.9rem; color: var(--text-light);">Year</p>
+            </div>
+            <div class="cert-card">
+                <h3>Certificate Name 2</h3>
+                <p class="issuer">Issuing Organization</p>
+                <p style="font-size: 0.9rem; color: var(--text-light);">Year</p>
+            </div>
+            <div class="cert-card">
+                <h3>Certificate Name 3</h3>
+                <p class="issuer">Issuing Organization</p>
+                <p style="font-size: 0.9rem; color: var(--text-light);">Year</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Get In Touch</h2>
+        <div class="contact-content">
+            <p>
+                I'm always interested in hearing about new opportunities and connecting with fellow professionals. Feel free to reach out!
+            </p>
+            <div class="contact-links">
+                <a href="mailto:your.email@example.com" class="contact-link">Email</a>
+                <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">LinkedIn</a>
+                <a href="https://github.com/yourprofile" target="_blank" class="contact-link">GitHub</a>
+                <a href="https://twitter.com/yourprofile" target="_blank" class="contact-link">Twitter</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved. | Built with HTML & CSS</p>
+    </footer>
+
+    <script>
+        // Simple scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
